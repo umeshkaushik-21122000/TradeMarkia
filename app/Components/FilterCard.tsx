@@ -50,19 +50,20 @@ const FilterCard = ({ data }: any) => {
   };
 
   return (
-    <div onClick={handleClick}>
+    <div className='h-[20vh] mt-5 overflow-auto' onClick={handleClick}>
       {data[Object.keys(data)[0]].map((obj: any) => (
-        <div key={obj.key}>
+        <div className='flex gap-3 text-lg my-5' key={obj.key}>
           <input
             type="checkbox"
             name={obj.key}
             checked={selectedFilters.includes(obj.key)} // Check if the filter is selected
             onChange={() => {}} // Prevent the default behavior of the checkbox
           />
-          <p>{obj.key}</p>
+          <p>{obj.key.toUpperCase()}</p>
         </div>
       ))}
-    </div>
+      </div>
+
   );
 };
 

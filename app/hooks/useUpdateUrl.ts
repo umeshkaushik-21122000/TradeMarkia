@@ -111,7 +111,6 @@ const useUrlChange = (apiEndpoint: string) => {
     };
 
     fetchData();
-  // Dependency on inputQuery, statusParams, ownersParams, attorneysParams, and lawFirmsParams to trigger effect when URL query changes
   }, [inputQuery, statusParams, ownersParams, attorneysParams, lawFirmsParams]);
 
   return { data, loading, error };

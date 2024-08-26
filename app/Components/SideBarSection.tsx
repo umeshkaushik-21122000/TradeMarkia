@@ -5,8 +5,8 @@ import FilterSection from './FilterSection'
 const SideBarSection = ({data}:any) => {
     if(!data)return;
   return (
-    <div>
-        {/* <StatusSection /> */}
+    <div className=' flex flex-col gap-y-3'>
+        <StatusSection />
         <FilterSection data={data?data:{}} />
     </div>
   )

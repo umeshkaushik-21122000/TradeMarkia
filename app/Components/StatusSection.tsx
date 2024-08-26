@@ -6,12 +6,24 @@ const StatusSection = () => {
   const router = useRouter();
   const searchParams = useSearchParams(); // Get search parameters
 
+
+  const getColorClass = (color: string) => {
+    switch (color) {
+      case 'green': return 'bg-green-600';
+      case 'yellow': return 'bg-yellow-600';
+      case 'red': return 'bg-red-600';
+      case 'blue': return 'bg-blue-600';
+      default: return 'hidden';
+    }
+  };
+
+
   const statusOptions = [
-    { name: 'All', id: 1 },
-    { name: 'Registered', id: 2 },
-    { name: 'Pending', id: 3 },
-    { name: 'Abandoned', id: 4 },
-    { name: 'Others', id: 5 },
+    { name: 'All', id: 1,color:'transparent' },
+    { name: 'Registered', id: 2,color:'green' },
+    { name: 'Pending', id: 3,color:'yellow' },
+    { name: 'Abandoned', id: 4,color:'red' },
+    { name: 'Others', id: 5,color:'blue' },
   ];
 
   useEffect(() => {
@@ -54,20 +66,24 @@ const StatusSection = () => {
       return newStatuses;
     });
   };
-
   return (
-    <div>
-      <h2>Status</h2>
-      {statusOptions.map((option) => (
-        <button
-          key={option.id}
-          type="button"
-          onClick={() => handleStatusToggle(option.name)}
-          className={selectedStatuses.includes(option.name) ? 'border border-2 border-black bg-gray-500 p-3' : 'p-2'}
-        >
-          {option.name}
-        </button>
-      ))}
+    <div className='flex flex-col w-full p-6 bg-white border border-gray-200 rounded-lg shadow '>
+      <span className='font-bold mb-3'>Status</span>
+      <div className='flex flex-wrap gap-3'>
+      {statusOptions.map((option) =>{
+        return (
+          <button
+            key={option.id}
+            type="button"
+            onClick={() => handleStatusToggle(option.name)}
+            className={`flex justify-center gap-x-2 items-center text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 ${selectedStatuses.includes(option.name)?'bg-blue-200 text-blue-400 border-blue-500':''}`}
+          >
+            <div className={`h-[7px] w-[7px] rounded-full ${getColorClass(option.color)}`} />
+            <span >{option.name}</span>
+          </button>
+        )
+      })}
+      </div>
     </div>
   );
 };

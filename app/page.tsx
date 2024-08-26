@@ -12,12 +12,16 @@ const Home: React.FC = () => {
 
     const {data,loading,error}=useUrlChange('https://vit-tm-task.api.trademarkia.app/api/v3/us');
 
+    if(loading||!data)return <div>loading....</div>
+    if (error)return <p>some error detected</p>
   return (
-    <div className='p-24 text-black'>
+    <div className='text-black'>
         <HeaderSection />
-        <SideBarSection data={data} />
-        {/* <ResultSection data={data} /> */}
-    </div>
+        <div className='sticky top-72 flex p-12 gap-10'>
+            <ResultSection data={data.body.hits.hits} />
+            <SideBarSection data={data} />
+        </div>
+        </div>
   );
 };
 
