@@ -16,10 +16,14 @@ const Home: React.FC = () => {
   return (
     <div className='text-black'>
       <HeaderSection />
-      <div className='sticky top-72 flex p-12 gap-10'>
-        <ResultSection data={data.body.hits.hits} />
-        <SideBarSection data={data} />
-      </div>
+      <div className='mt-3 flex p-12 gap-10'>
+  <div className='result-section basis-[70%]'>
+    <ResultSection data={data.body.hits.hits} />
+  </div>
+  <div className='basis-1/3' >
+    <SideBarSection data={data} />
+  </div>
+</div>
     </div>
   );
 };

@@ -58,7 +58,7 @@ const InputSection = () => {
             />
     </div>
             {/* to be fixed : button height */}
-        <button type="submit" className="text-white end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-8 py-3">Search</button>
+        <button type="submit" className="text-white end-2.5 bottom-2.5 bg-[#4380EC] hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-8 py-3">Search</button>
 </form>
 
     );
