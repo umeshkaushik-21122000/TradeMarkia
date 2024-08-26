@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import FilterCard from './FilterCard';
-import { current } from '@reduxjs/toolkit';
 
 const FilterSection = ({ data }: any) => {
 
