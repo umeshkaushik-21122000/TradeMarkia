@@ -1,17 +1,24 @@
 
 'use client';
+import { Suspense } from 'react';
 import HeaderSection from './Components/HeaderSection';
 import SideBarSection from './Components/SideBarSection';
 import ResultSection from './Components/ResultSection';
 import useUrlChange from './hooks/useUpdateUrl';
 import MainSkeleton from './Components/MainSkeleton';
 
+const MainComponet = () =>{
+  return(
+    <Suspense fallback={<MainSkeleton />}>
+      <Home />
+    </Suspense>
+  )
+}
 
-const Home: React.FC = () => {
+const Home: React.FC = async() => {
 
-    const {data,loading,error}=useUrlChange('https://vit-tm-task.api.trademarkia.app/api/v3/us');
-
-    if(loading)return <MainSkeleton />
+    const {data,loading,error}=await useUrlChange('https://vit-tm-task.api.trademarkia.app/api/v3/us');
+    if(loading)return 
     if (error)return <p>some error detected</p>
     if(!data)return;
   return (
@@ -25,4 +32,4 @@ const Home: React.FC = () => {
   );
 };
 
-export default Home;
+export default MainComponet;

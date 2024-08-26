@@ -99,7 +99,7 @@ const fetchData = async (
 };
 
 // Main hook function
-const useUrlChange = (apiEndpoint: string) => {
+const useUrlChange = async(apiEndpoint: string) => {
   const [data, setData] = useState<ApiResponse | null>(null);
   const [error, setError] = useState<Error | null>(null);
   const [loading, setLoading] = useState<boolean>(false);

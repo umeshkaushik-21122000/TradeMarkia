@@ -54,13 +54,14 @@ const StatusSection = () => {
       <span className='font-bold mb-3'>Status</span>
       <div className='flex flex-wrap gap-3'>
         {statusOptions.map(option => {
-          const isSelected = selectedStatuses.includes(option.name);
+          const isSelected = selectedStatuses.includes(option.name.toLocaleLowerCase());
+          console.log(isSelected,option.name);
           return (
             <button
               key={option.id}
               type="button"
               onClick={() => handleStatusToggle(option.name.toLowerCase())}
-              className={`flex justify-center gap-x-2 items-center text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 ${isSelected ? 'bg-blue-200 text-blue-400 border-blue-500' : ''}`}
+              className={`flex justify-center gap-x-2 items-center text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 ${isSelected ? 'bg-blue-600 text-blue-400 border-blue-500' : ''}`}
             >
               <div className={`h-[7px] w-[7px] rounded-full ${getColorClass(option.color)}`} />
               <span>{option.name}</span>
