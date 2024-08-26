@@ -3,7 +3,7 @@ import FilterCard from './FilterCard';
 import { current } from '@reduxjs/toolkit';
 
 const FilterSection = ({ data }: any) => {
-  console.log("this is data",data);
+
   const [selectFilter,setSelectFilter]=useState(0);
   const [list,setList]=useState<any>({
     current_owners:data.body.aggregations.current_owners.buckets
@@ -27,14 +27,14 @@ const FilterSection = ({ data }: any) => {
   ];
 
   const handleClick=(id:any)=>{
-    console.log("this is id",id);
+
     setSelectFilter(id);
     const name=filters[id].key;
     setList({
       [name]:data.body.aggregations[name].buckets
     })
   }
-  console.log(" this is list",list);
+
   return (
     <div className=' flex flex-col w-full  p-6 bg-white border border-gray-200 rounded-lg shadow'>
         <div className='flex gap-x-3'>

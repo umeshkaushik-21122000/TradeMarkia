@@ -60,7 +60,18 @@ interface ResultCardProps {
 function formatDate(timestampStr: string): string {
   // Convert the string to a number
   const timestamp = parseInt(timestampStr, 10);
+
+  // Check if the timestamp is a valid number
+  if (isNaN(timestamp)) {
+    return '';
+  }
+
   const date = new Date(timestamp * 1000);
+
+  // Check if the date is valid
+  if (isNaN(date.getTime())) {
+    return '';
+  }
 
   // Define options for the date formatting
   const options: Intl.DateTimeFormatOptions = {
@@ -72,6 +83,7 @@ function formatDate(timestampStr: string): string {
   // Format the date to '10 Jan 2007' format
   return date.toLocaleDateString('en-GB', options);
 }
+
 
 function getStatusColor(status:string):string {
   switch(status){
@@ -94,7 +106,6 @@ const ResultCard: React.FC<ResultCardProps> = ({
   name,
   owner,
 }) => {
-  console.log(description.length);
   return (
     <tr className="bg-white border-b hover:bg-gray-100 z-10">
       <td className="px-6 py-3">
