@@ -6,7 +6,9 @@ const MainSkeleton = () => {
     <div className="animate-pulse">
       <HeaderSkeleton />
       <div className="flex">
+        <table>
         <SkeletonLoader rows={10} />
+        </table>
         <SideBarLoader />
       </div>
     </div>
