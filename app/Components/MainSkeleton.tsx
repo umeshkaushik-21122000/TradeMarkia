@@ -5,6 +5,7 @@ const MainSkeleton = () => {
   return (
     <div className="animate-pulse">
       <HeaderSkeleton />
+        <ShareSectionSkeleton />
       <div className="flex">
         <table>
         <SkeletonLoader rows={10} />
@@ -119,6 +120,32 @@ const SkeletonRow: React.FC = () => {
     </tr>
   );
 };
+
+const ShareSectionSkeleton: React.FC = () => {
+  return (
+    <div className='p-12 animate-pulse'>
+      {/* Skeleton for the text section */}
+      <div className='font-bold text-lg text-gray-300 border-b pb-3 bg-gray-200 h-6 w-3/4 mb-4'></div>
+      
+      {/* Skeleton for the buttons and icons */}
+      <div className='flex justify-between items-center mt-3 pe-24'>
+        <div className='flex items-center gap-x-5'>
+          {/* Placeholder buttons */}
+          <div className='flex items-center gap-x-5'>
+            <div className='bg-gray-200 h-8 w-24 rounded-lg'></div>
+            <div className='bg-gray-200 h-8 w-24 rounded-lg'></div>
+          </div>
+        </div>
+        <div className='flex gap-x-5'>
+          {/* Placeholder buttons with icons */}
+          <div className='flex items-center justify-center bg-gray-200 rounded-lg h-8 w-24'></div>
+          <div className='flex items-center justify-center bg-gray-200 rounded-full h-8 w-8'></div>
+          <div className='flex items-center justify-center bg-gray-200 rounded-full h-8 w-8'></div>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 const SkeletonLoader: React.FC<{ rows: number }> = ({ rows }) => {
   return (

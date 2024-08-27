@@ -18,8 +18,8 @@ const Home: React.FC = () => {
     <div className='text-black'>
       <HeaderSection />
       <ShareSection results={data.body.hits.hits.length} />
-      <div className='mt-3 flex p-12 gap-10'>
-  <div className='result-section basis-[70%]'>
+      <div className='flex p-12 pt-0 gap-10'>
+  <div className='basis-[70%]'>
     <ResultSection data={data.body.hits.hits} />
   </div>
   <div className='basis-1/3' >
