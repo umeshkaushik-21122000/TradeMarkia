@@ -1,19 +1,26 @@
 import React from "react";
 
-import {  ResultSectionProps } from "../types/type";
+import { ResultSectionProps } from "../types/type";
 import ResultCard from "./ResultCard";
 
 const ResultSection: React.FC<ResultSectionProps> = ({ data }) => {
-
   return (
     <div className="gap-y-3">
       <table className="text-sm text-left w-full">
         <thead className="text-xs uppercase border-b-2">
           <tr>
-            <th scope="col" className="px-6 py-3">Mark</th>
-            <th scope="col" className="px-6 py-3">Details</th>
-            <th scope="col" className="px-6 py-3">Status</th>
-            <th scope="col" className="px-6 py-3">Class/Description</th>
+            <th scope="col" className="px-6 py-3">
+              Mark
+            </th>
+            <th scope="col" className="px-6 py-3">
+              Details
+            </th>
+            <th scope="col" className="px-6 py-3">
+              Status
+            </th>
+            <th scope="col" className="px-6 py-3">
+              Class/Description
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -37,4 +44,3 @@ const ResultSection: React.FC<ResultSectionProps> = ({ data }) => {
 };
 
 export default ResultSection;
-

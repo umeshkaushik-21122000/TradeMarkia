@@ -1,17 +1,13 @@
-import React, { useState } from 'react';
-import FilterCard from './FilterCard';
-import { Bucket, FilterProps, FilterSectionData } from '../types/type';
-import { filters } from '../data/data';
-
-
+import React, { useState } from "react";
+import FilterCard from "./FilterCard";
+import { Bucket, FilterProps, FilterSectionData } from "../types/type";
+import { filters } from "../data/data";
 
 const FilterSection: React.FC<FilterProps> = ({ data }) => {
   const [selectFilter, setSelectFilter] = useState<number>(0);
   const [list, setList] = useState<Partial<Record<string, Bucket[]>>>({
     current_owners: data.current_owners.buckets,
   });
-
-
 
   const handleClick = (id: number) => {
     setSelectFilter(id);
@@ -27,7 +23,7 @@ const FilterSection: React.FC<FilterProps> = ({ data }) => {
         {filters.map((filter) => (
           <div key={filter.id}>
             <button
-              className={`${selectFilter === filter.id ? 'underline font-bold' : ''}`}
+              className={`${selectFilter === filter.id ? "underline font-bold" : ""}`}
               onClick={() => handleClick(filter.id)}
             >
               {filter.name}

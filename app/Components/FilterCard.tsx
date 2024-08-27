@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
-import { FilterCardProps } from '../types/type';
-
-
+import React, { useState, useEffect } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { FilterCardProps } from "../types/type";
 
 const FilterCard: React.FC<FilterCardProps> = ({ data }) => {
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
@@ -22,7 +20,7 @@ const FilterCard: React.FC<FilterCardProps> = ({ data }) => {
   const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
     const target = e.target as HTMLInputElement;
 
-    if (target.type === 'checkbox') {
+    if (target.type === "checkbox") {
       const filter = target.name;
       const filterKey = Object.keys(data)[0] as keyof typeof data;
 
@@ -38,7 +36,7 @@ const FilterCard: React.FC<FilterCardProps> = ({ data }) => {
           queryParams.append(filterKey, filter);
         });
 
-        const newUrl = `${queryParams.toString() ? `?${queryParams.toString()}` : ''}`;
+        const newUrl = `${queryParams.toString() ? `?${queryParams.toString()}` : ""}`;
         router.push(newUrl);
 
         return newFilters;

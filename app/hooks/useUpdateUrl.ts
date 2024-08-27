@@ -1,13 +1,12 @@
-import { useEffect, useState } from 'react';
-import { useSearchParams } from 'next/navigation';
-import { ApiResponse, RequestBody } from '../types/type';
-
+import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { ApiResponse, RequestBody } from "../types/type";
 
 // Default request body
 const defaultRequestBody: RequestBody = {
-  input_query: '',
-  input_query_type: '',
-  sort_by: 'default',
+  input_query: "",
+  input_query_type: "",
+  sort_by: "default",
   status: [],
   exact_match: false,
   date_query: false,
@@ -18,46 +17,49 @@ const defaultRequestBody: RequestBody = {
   classes: [],
   page: 1,
   rows: 10,
-  sort_order: 'desc',
+  sort_order: "desc",
   states: [],
   counties: [],
 };
 
 // Utility function to extract and parse search params
-const extractParams = (searchParams: URLSearchParams, paramName: string): string[] => {
+const extractParams = (
+  searchParams: URLSearchParams,
+  paramName: string,
+): string[] => {
   return searchParams.getAll(paramName);
 };
 
 // Utility function to construct request body
 const buildRequestBody = (
   searchParams: URLSearchParams,
-  inputQuery: string
+  inputQuery: string,
 ): RequestBody => {
   return {
     ...defaultRequestBody,
     input_query: inputQuery,
-    status: extractParams(searchParams, 'status'),
-    owners: extractParams(searchParams, 'current_owners'),
-    attorneys: extractParams(searchParams, 'attorneys'),
-    law_firms: extractParams(searchParams, 'law_firms'),
+    status: extractParams(searchParams, "status"),
+    owners: extractParams(searchParams, "current_owners"),
+    attorneys: extractParams(searchParams, "attorneys"),
+    law_firms: extractParams(searchParams, "law_firms"),
   };
 };
 
 // Fetch data function
 const fetchData = async (
   apiEndpoint: string,
-  requestBody: RequestBody
+  requestBody: RequestBody,
 ): Promise<ApiResponse> => {
   const response = await fetch(apiEndpoint, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
     body: JSON.stringify(requestBody),
   });
 
   if (!response.ok) {
-    throw new Error('Network response was not ok');
+    throw new Error("Network response was not ok");
   }
 
   return response.json();
@@ -69,7 +71,7 @@ const useUrlChange = (apiEndpoint: string) => {
   const [error, setError] = useState<Error | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const searchParams = useSearchParams();
-  const inputQuery = searchParams.get('input_query') || '';
+  const inputQuery = searchParams.get("input_query") || "";
 
   useEffect(() => {
     const requestBody = buildRequestBody(searchParams, inputQuery);

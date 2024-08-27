@@ -8,10 +8,6 @@ const StatusSection = () => {
   const router = useRouter();
   const searchParams = useSearchParams(); // Get search parameters
 
-
-
-
-
   // Update selectedStatuses based on URL change
   useEffect(() => {
     const statusParams = searchParams.getAll("status");
@@ -62,7 +58,7 @@ const StatusSection = () => {
             >
               <div
                 className={`h-[7px] w-[7px] rounded-full ${getColorClass(
-                  option.color
+                  option.color,
                 )}`}
               />
               <span>{option.name}</span>
