@@ -4,7 +4,7 @@ import {  ResultSectionProps } from "../types/type";
 import ResultCard from "./ResultCard";
 
 const ResultSection: React.FC<ResultSectionProps> = ({ data }) => {
-  console.log(data);
+
   return (
     <div className="gap-y-3">
       <table className="text-sm text-left w-full">
