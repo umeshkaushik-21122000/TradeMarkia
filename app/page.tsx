@@ -21,7 +21,7 @@ const Home: React.FC = () => {
     <ResultSection data={data.body.hits.hits} />
   </div>
   <div className='basis-1/3' >
-    <SideBarSection data={data} />
+    <SideBarSection data={data.body.aggregations} />
   </div>
 </div>
     </div>

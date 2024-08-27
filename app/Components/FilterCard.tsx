@@ -1,47 +1,44 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { FilterCardProps } from '../types/type';
 
-const FilterCard = ({ data }: any) => {
+
+
+const FilterCard: React.FC<FilterCardProps> = ({ data }) => {
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
   const router = useRouter();
   const searchParams = useSearchParams(); // Get search parameters
 
   useEffect(() => {
-    // Extract the specific filter parameters from the URL and initialize selectedFilters
-    const filterKey = Object.keys(data)[0]; // Assuming `data` has only one key
+    // Determine the active filter key (current_owners, law_firms, or attorneys)
+    const filterKey = Object.keys(data)[0] as keyof typeof data;
     const filterValues = searchParams.getAll(filterKey);
-    
+
     if (filterValues.length > 0) {
       setSelectedFilters(filterValues);
     }
   }, [searchParams, data]);
 
-  const handleClick = (e: any) => {
-    if (e.target.type === 'checkbox') {
-      const filter = e.target.name;
-      const filterKey = Object.keys(data)[0]; // Assuming `data` has only one key
+  const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    const target = e.target as HTMLInputElement;
+
+    if (target.type === 'checkbox') {
+      const filter = target.name;
+      const filterKey = Object.keys(data)[0] as keyof typeof data;
 
       setSelectedFilters((prevFilters) => {
-        // Toggle the filter in the array
         const newFilters = prevFilters.includes(filter)
           ? prevFilters.filter((item) => item !== filter)
           : [...prevFilters, filter];
 
-        // Create URLSearchParams from existing searchParams
         const queryParams = new URLSearchParams(searchParams.toString());
-
-        // Remove old filter parameters for this specific key
         queryParams.delete(filterKey);
 
-        // Add new filter parameters
         newFilters.forEach((filter) => {
           queryParams.append(filterKey, filter);
         });
 
-        // Construct the new URL
         const newUrl = `${queryParams.toString() ? `?${queryParams.toString()}` : ''}`;
-
-        // Update the URL
         router.push(newUrl);
 
         return newFilters;
@@ -49,21 +46,23 @@ const FilterCard = ({ data }: any) => {
     }
   };
 
+  // Get the active filter list based on the data key
+  const filterList = data[Object.keys(data)[0] as keyof typeof data] || [];
+
   return (
-    <div className='h-[20vh] mt-5 overflow-auto' onClick={handleClick}>
-      {data[Object.keys(data)[0]].map((obj: any) => (
-        <div className='flex gap-3 text-lg my-5' key={obj.key}>
+    <div className="h-[20vh] mt-5 overflow-auto" onClick={handleClick}>
+      {filterList.map((obj) => (
+        <div className="flex gap-3 text-lg my-5" key={obj.key}>
           <input
             type="checkbox"
             name={obj.key}
-            checked={selectedFilters.includes(obj.key)} // Check if the filter is selected
-            onChange={() => {}} // Prevent the default behavior of the checkbox
+            checked={selectedFilters.includes(obj.key)}
+            onChange={() => {}}
           />
           <p>{obj.key.toUpperCase()}</p>
         </div>
       ))}
-      </div>
-
+    </div>
   );
 };
 

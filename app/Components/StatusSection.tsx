@@ -1,35 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { getColorClass } from "../utils/utils";
+import { statusOptions } from "../data/data";
 
 const StatusSection = () => {
   const [selectedStatuses, setSelectedStatuses] = useState<string[]>([]);
   const router = useRouter();
   const searchParams = useSearchParams(); // Get search parameters
 
-  // Function to get color class based on the color name
-  const getColorClass = (color: string) => {
-    switch (color) {
-      case "green":
-        return "bg-green-600";
-      case "yellow":
-        return "bg-yellow-600";
-      case "red":
-        return "bg-red-600";
-      case "blue":
-        return "bg-blue-600";
-      default:
-        return "hidden";
-    }
-  };
 
-  // Status options for buttons
-  const statusOptions = [
-    { name: "All", id: 1, color: "transparent" },
-    { name: "Registered", id: 2, color: "green" },
-    { name: "Pending", id: 3, color: "yellow" },
-    { name: "Abandoned", id: 4, color: "red" },
-    { name: "Others", id: 5, color: "blue" },
-  ];
+
+
 
   // Update selectedStatuses based on URL change
   useEffect(() => {

@@ -1,54 +1,43 @@
 import React, { useState } from 'react';
 import FilterCard from './FilterCard';
+import { Bucket, FilterProps, FilterSectionData } from '../types/type';
+import { filters } from '../data/data';
 
-const FilterSection = ({ data }: any) => {
 
-  const [selectFilter,setSelectFilter]=useState(0);
-  const [list,setList]=useState<any>({
-    current_owners:data.body.aggregations.current_owners.buckets
-  })
-  const filters = [
-    {
-      id: 0,
-      name: "Owners",
-      key: 'current_owners',
-    },
-    {
-      id: 1,
-      name: "Law Firms",
-      key: 'law_firms',
-    },
-    {
-      id: 2,
-      name: "Attorneys",
-      key: 'attorneys',
-    },
-  ];
 
-  const handleClick=(id:any)=>{
+const FilterSection: React.FC<FilterProps> = ({ data }) => {
+  const [selectFilter, setSelectFilter] = useState<number>(0);
+  const [list, setList] = useState<Partial<Record<string, Bucket[]>>>({
+    current_owners: data.current_owners.buckets,
+  });
 
+
+
+  const handleClick = (id: number) => {
     setSelectFilter(id);
-    const name=filters[id].key;
+    const name = filters[id].key;
     setList({
-      [name]:data.body.aggregations[name].buckets
-    })
-  }
+      [name]: data[name as keyof FilterSectionData].buckets,
+    });
+  };
 
   return (
-    <div className=' flex flex-col w-full  p-6 bg-white border border-gray-200 rounded-lg shadow'>
-        <div className='flex gap-x-3'>
-        {filters.map((filter) => {
-        // Extracting the relevant data for each filter
-        return (
-          <div  key={filter.id}>
-            <button className={`${selectFilter===filter.id?'underline font-bold':''}`} onClick={(e)=>handleClick(filter.id)}>{filter.name}</button> {/* Display the filter name */}
+    <div className="flex flex-col w-full p-6 bg-white border border-gray-200 rounded-lg shadow">
+      <div className="flex gap-x-3">
+        {filters.map((filter) => (
+          <div key={filter.id}>
+            <button
+              className={`${selectFilter === filter.id ? 'underline font-bold' : ''}`}
+              onClick={() => handleClick(filter.id)}
+            >
+              {filter.name}
+            </button>
           </div>
-        );
-      })}
-        </div>
-       <FilterCard data={list} />
+        ))}
+      </div>
+      <FilterCard data={list} />
     </div>
   );
-}
+};
 
 export default FilterSection;
